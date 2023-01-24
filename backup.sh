@@ -6,15 +6,36 @@
 
 set -e
 
-# Folder creation 
+# Check if lab number is present
+if [[ -z $1 ]]; then
+    echo "********************************************************"
+    echo "*    Syntax: ./backup.sh lab[*]              "
+    echo "*    where [*] is the lab number (1~13)      "
+    echo "********************************************************"
+    exit 1
+fi
+# ----------------------------------
+
+# Check if source folder exists
+source_dir="/group/cs1050/submissions/1050/A/$1/.valid"
+if test ! -d "$source_dir"; then
+    echo "********************************************************"
+    echo "*    Error: $1 submissions not available            "
+    echo "*    Please wait until the lab session takes place "
+    echo "********************************************************" 
+    exit 1
+fi
+# ----------------------------------
+
+# Folder creation
 echo "Executing backup script"
-file="$HOME/pawprints.txt"
+file="${PWD}/pawprints.txt"
 new_directory="cs1050_local_labs"
 if test ! -d "$new_directory"; then
     echo "No local folder detected. Creating folder"
     mkdir "$new_directory"
 fi
-cd ~/$new_directory || exit
+cd ${PWD}/$new_directory || exit
 new_directory=$1_backup
 if test ! -d "$new_directory"; then
     echo "Creating $1 folder for backup"
