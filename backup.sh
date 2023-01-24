@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # CMP_SC 1050 Submission Backup Script
-# Written by Matt Marlow 
+# Written by Matt Marlow and Daphne Zou
 # 1/23/2023
 
 set -e
@@ -30,12 +30,20 @@ fi
 # Folder creation
 echo "Executing backup script"
 file="${PWD}/pawprints.txt"
+if test ! -f file; then 
+    echo "********************************************************"
+    echo "*    No pawprints.txt file detected.           "
+    echo "*    Create a .txt file containing the  "
+    echo "*    pawprints you wish to grade/backup. "
+    echo "********************************************************" 
+    exit 1
+fi
 new_directory="cs1050_local_labs"
 if test ! -d "$new_directory"; then
     echo "No local folder detected. Creating folder"
     mkdir "$new_directory"
 fi
-cd ${PWD}/$new_directory || exit
+cd "${PWD}"/$new_directory || exit
 new_directory=$1_backup
 if test ! -d "$new_directory"; then
     echo "Creating $1 folder for backup"
