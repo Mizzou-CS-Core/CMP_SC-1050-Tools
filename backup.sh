@@ -33,8 +33,9 @@ file="${PWD}/pawprints.txt"
 if test ! -f "$file"; then 
     echo "********************************************************"
     echo "*    No pawprints.txt file detected.           "
-    echo "*    Create a .txt file containing the  "
-    echo "*    pawprints you wish to grade/backup. "
+    echo "*    Please run script gen-group-roster        "
+    echo "*    to create a .txt file containing the      "
+    echo "*    pawprints you wish to grade/backup.       "
     echo "********************************************************" 
     exit 1
 fi
