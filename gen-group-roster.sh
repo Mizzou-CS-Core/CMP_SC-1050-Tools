@@ -55,8 +55,9 @@ if [[ -f "${OUTPUT_FILE}" ]]; then
 fi
 #-------------------------------------
 
+TOKEN_FILE="/group/cs1050/tokens/token.env"
 CANVAS_API="https://umsystem.instructure.com/api/v1/"
-TOKEN="16765~H4OgOAbmC2uapHCSN7pFbzummd9Inp1EYDs70XtnNtvHaVnGWkpM6WjfGSAV6ouK"
+read -r TOKEN < ${TOKEN_FILE}
 
 # Check if course_id exists
 COURSE_URL="${CANVAS_API}/courses/$1"
