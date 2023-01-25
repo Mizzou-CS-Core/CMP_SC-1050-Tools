@@ -30,7 +30,7 @@ fi
 # Folder creation
 echo "Executing backup script"
 file="${PWD}/pawprints.txt"
-if test ! -f file; then 
+if test ! -f "$file"; then 
     echo "********************************************************"
     echo "*    No pawprints.txt file detected.           "
     echo "*    Create a .txt file containing the  "
@@ -54,20 +54,24 @@ else
 fi 
 # ----------------------------------
 
+echo "-----------------------------------"
+
 # Copy student submissions
 missing="missing_submissions.txt"
 while read p || [[ -n $p ]]; do 
-    if ! cp -rL /group/cs1050/submissions/1050/A/"$1"/"$p" "$1"_backup ; then
-        echo "$p" >> $missing # If no valid submisision, add them to the (temporary) invalid list so we can go look for them (maybe they submitted late?)
-        echo "DID NOT SUBMIT A LAB WITHIN WINDOW"
+    if ! cp -rL /group/cs1050/submissions/1050/A/"$1"/"$p" "$1"_backup 2> /dev/null ; then
+        echo "$p" >> $missing # If no valid submission, add them to the (temporary) invalid list so we can go look for them (maybe they submitted late?)
+        echo "$p DID NOT SUBMIT A COMPILING LAB WITHIN WINDOW"
     fi    
 done < "$file"
 # ----------------------------------
 
+echo "-----------------------------------"
+
 # Search for invalid entries 
 if test -f "$missing"; then
     while read p || [[ -n $p ]]; do 
-    if ! cp -rL /group/cs1050/submissions/1050/A/"$1"/.invalid/*"$p"* "$1"_backup; then
+    if ! cp -rL /group/cs1050/submissions/1050/A/"$1"/.invalid/*"$p"* "$1"_backup 2> /dev/null ; then
         echo "$p SUBMISSION IS COMPLETELY MISSING. AUTOMATIC 0"
     fi    
 done < "$missing"
@@ -75,7 +79,7 @@ fi
 # ----------------------------------
 
 # Delete missing submissions file (temp)
-if test -f "missing_submissions.txt"; then
-    rm "missing_submissions.txt"
+if test -f "$missing"; then
+    rm "$missing"
 fi
 # ----------------------------------
