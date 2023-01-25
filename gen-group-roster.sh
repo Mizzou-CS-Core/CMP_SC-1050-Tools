@@ -16,8 +16,11 @@ usage() {
     
 ===========================================================
 Usage: $0 COURSE_ID GROUP_NAME [OUTPUT_FILE]
-Example:  ./gen-group-roster 145507 Daphne
-Generate a roster file for mucs using course id. File will be stored in current directory.
+Example:  ./gen-group-roster.sh 145507 Daphne
+Generate a roster file for grading groups using course id and group name. 
+File contains the pawprints of all students in given grading group and 
+will be stored in current directory.
+
 ARGUMENTS
  
   COURSE_ID         The ID of the Canvas course. This can be found in the URL of
